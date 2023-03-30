@@ -38,5 +38,3 @@ export async function generate(prompt, path) {
   
   return false;
 }
-
-generate('cat', './');
