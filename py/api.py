@@ -2,6 +2,8 @@ import requests
 import base64
 from time import sleep 
 
+CREATEINTERVAL = 2
+
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'
 }
@@ -22,7 +24,7 @@ def generate(prompt,path):
     if req.status_code == 201 and id:
         # Пока задача не выполнена, проверяем статус
         while requests.get(f'https://fusionbrain.ai/api/v1/text2image/generate/pockets/{id}/status', headers=headers).json().get('result', '') != 'SUCCESS':
-            sleep(0.2)
+            sleep(CREATEINTERVAL)
         # Получаем результат в виде base64-кода
         result = requests.get(f'https://fusionbrain.ai/api/v1/text2image/generate/pockets/{id}/entities', headers=headers)
         newjpgtxt = result.json().get('result', [{}])[0].get('response', [None])[0]
