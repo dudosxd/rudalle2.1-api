@@ -76,10 +76,10 @@ class rudalleClient {
     }
     return false;
   }
-}
+};
 
 export async function generate(prompt, path, style) {
-  if (!style || style == undefined) {style = ``;};
+  if (!style || style == undefined) { style = ``; };
   const client = new rudalleClient();
   const [status, id] = await client.ask(prompt, style);
   if (status !== true) {
